@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.marketingapp.dto.LeadDto;
 import com.marketingapp.entities.Lead;
 import com.marketingapp.service.LeadService;
+import com.marketingapp.util.email.EmailService;
 
 @Controller
 public class LeadController {
 
 	@Autowired
 	private LeadService leadService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping("/create") // @WebServlet()
 	public String viewCreateLeadForm() {
@@ -34,6 +38,8 @@ public class LeadController {
 		model.addAttribute("message", "Lead is saved!");
 		
 		leadService.saveReg(lead);
+		
+		emailService.sendEmail(lead.getEmail(), "Lead Saved", "New lead has been saved!");
 		
 		return "create_lead";
 	}

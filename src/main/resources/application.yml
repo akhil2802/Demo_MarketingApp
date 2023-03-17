@@ -12,3 +12,17 @@ spring:
     view:
       prefix: /WEB-INF/jsps/
       suffix: .jsp
+      
+# Configuring SMTP server:
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: selauto2802@gmail.com
+    password: atrukjpvnraqapmx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
