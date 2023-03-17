@@ -1,11 +1,16 @@
 package com.marketingapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 //import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.marketingapp.dto.LeadDto;
 import com.marketingapp.entities.Lead;
@@ -22,9 +27,9 @@ public class LeadController {
 		return "create_lead"; // acts as RequestDispatcher()
 	}
 
-	/*   USING ModelAtribute():
+	//   USING ModelAtribute():
 	@RequestMapping("/saveReg")
-	public String saveOneLead(@ModelAttribute Lead lead, ModelMap model) {
+	public String saveOneLead(@ModelAttribute Lead lead, Model model) {
 		
 		model.addAttribute("message", "Lead is saved!");
 		
@@ -32,7 +37,7 @@ public class LeadController {
 		
 		return "create_lead";
 	}
-	*/
+	
 
 	/*    USING RequestParam():
 	 * @RequestMapping("/saveReg") public String
@@ -47,7 +52,7 @@ public class LeadController {
 	 * leadService.saveReg(lead);
 	 * 
 	 * return "create_lead"; }
-	 */
+	 
 	
 	@RequestMapping("/saveReg")
 	public String saveOneLead(LeadDto leadDto, ModelMap model) {
@@ -63,6 +68,27 @@ public class LeadController {
 		leadService.saveReg(lead);
 		
 		return "create_lead";
+	}
+	*/
+	
+	@RequestMapping("/listall")
+	public String getAllLeads(Model model) {
+		
+	    List<Lead> leads = leadService.findAllLeads();
+	    model.addAttribute("leads", leads);
+	    
+	    return "list_leads";
+	}
+	
+	@RequestMapping("/delete")
+	public String deleteLeadById(@RequestParam("id") long leadId, Model model) { 
+		
+		leadService.deleteLeadById(leadId);
+		
+	    List<Lead> leads = leadService.findAllLeads();
+	    model.addAttribute("leads", leads);
+	    
+	    return "list_leads";
 	}
 
 }
