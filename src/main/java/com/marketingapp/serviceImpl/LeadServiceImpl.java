@@ -1,6 +1,7 @@
 package com.marketingapp.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,16 @@ public class LeadServiceImpl implements LeadService {
 	public void deleteLeadById(long leadId) {
 		this.leadRepo.deleteById(leadId);
 		
+	}
+
+	@Override
+	public Lead findLeadById(long leadId) {
+		
+		Optional<Lead> findById = this.leadRepo.findById(leadId);
+		
+		Lead lead = findById.get();
+		
+		return lead;
 	}
 
 }

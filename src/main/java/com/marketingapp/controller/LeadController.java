@@ -90,5 +90,35 @@ public class LeadController {
 	    
 	    return "list_leads";
 	}
+	
+	@RequestMapping("/update")
+	public String updateLead(@RequestParam("id") long leadId, Model model) { 
+		
+		Lead lead = leadService.findLeadById(leadId);
+		
+		model.addAttribute("lead", lead);
+	    
+	    return "update_lead";
+	}
+	
+	@RequestMapping("/editReg")
+	public String editReg(LeadDto leadDto , Model model) { 
+		
+		Lead lead = new Lead();
+		lead.setId(leadDto.getId());
+		lead.setFirstName(leadDto.getFirstName());
+		lead.setLastName(leadDto.getLastName());
+		lead.setEmail(leadDto.getEmail());
+		lead.setMobile(leadDto.getMobile());
+		
+		leadService.saveReg(lead);
+		
+		List<Lead> leads = leadService.findAllLeads();
+		model.addAttribute("leads", leads);
+	    
+	    return "list_leads";
+	}
+	
+	
 
 }

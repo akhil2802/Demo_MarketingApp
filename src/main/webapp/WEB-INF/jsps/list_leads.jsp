@@ -25,7 +25,11 @@
 	    <td>${lead.lastName}</td>
 	    <td>${lead.email}</td>
 	    <td>${lead.mobile}</td>
-      	<td><a href="delete?id=${lead.id}">delete</a></td>    
+      	<td>
+      	  <a href="delete?id=${lead.id}">delete</a>
+      	  <a href="update?id=${lead.id}">update</a>  
+      	</td>
+      	    
       </tr>
      </c:forEach>
   </table>

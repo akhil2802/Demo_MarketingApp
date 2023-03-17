@@ -11,4 +11,6 @@ public interface LeadService {
 	public List<Lead> findAllLeads();
 
 	public void deleteLeadById(long leadId);
+
+	public Lead findLeadById(long leadId);
 }
